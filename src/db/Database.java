@@ -3,6 +3,7 @@ package db;
 import db.exception.EntityNotFoundException;
 import db.exception.InvalidEntityException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -29,8 +30,15 @@ public class Database {
         if (validator != null) {
             validator.validate(e);
         }
+        if (e instanceof Trackable) {
+            Trackable trackable = (Trackable) e;
+            Date now = new Date();
+            trackable.setCreationDate(now);
+            trackable.setLastModificationDate(now);
+        }
         Entity copy = e.copy();
         copy.id = idNumber++;
+        e.id = copy.id;
         entities.add(copy);
     }
 
@@ -57,6 +65,10 @@ public class Database {
         validateEntity(e);
         for (int i = 0 ; i < entities.size() ; i++){
             if (entities.get(i).id == e.id){
+
+                if (e instanceof Trackable) {
+                    ((Trackable) e).setLastModificationDate(new Date());
+                }
                 entities.set(i, e.copy());
                 return;
 
