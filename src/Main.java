@@ -8,7 +8,6 @@ public class Main {
         Database.add(ali);
 
         ali.name = "Ali Hosseini";
-
         Human aliFromTheDatabase = (Human) Database.get(ali.id);
 
         System.out.println("ali's name in the database: " + aliFromTheDatabase.name);
