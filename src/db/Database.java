@@ -12,10 +12,9 @@ public class Database {
     private Database(){}
 
 
-    public static void add(Entity e){
-        Entity copy = e.copy();
-        copy.id = idNumber ++;
-        entities.add(copy);
+    public static void add(Entity e) {
+        e.id = idNumber++;
+        entities.add(e.copy());
     }
 
     public static Entity get(int id) throws EntityNotFoundException {
