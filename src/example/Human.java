@@ -1,6 +1,7 @@
 package example;
 
 import db.Entity;
+import db.exception.InvalidEntityException;
 
 public class Human extends Entity {
     public static final int HUMAN_ENTITY_CODE = 14;
@@ -13,7 +14,7 @@ public class Human extends Entity {
     }
 
     @Override
-    public Entity copy() {
+    public Human copy() {
         Human copy = new Human(this.name, this.age);
         copy.id = this.id;
         return copy;
